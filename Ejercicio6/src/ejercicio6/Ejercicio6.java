@@ -10,29 +10,31 @@ package ejercicio6;
  */
 
 public class Ejercicio6 {
-
-    public static void main(String[] args) {
+    
+    /**
+     * En el metodo main se instancia la clase Cuenta y se muetra su saldo.
+     * Creamos los hilos y los iniciamos para extraer y añadir dinero a la cuenta.
+     * Hacemos un join de los dos hilos para asi comprobar el saldo de la cuenta
+     * cuando los dos hilos ya hayan terminado.
+     * @param args
+     * @throws InterruptedException 
+     */
+    public static void main(String[] args) throws InterruptedException {
         
         Cuenta objCuenta = new Cuenta();
         
-        System.out.println(objCuenta.toString());
+        System.out.println("Saldo inicial = "+objCuenta.getSaldo());
         
-        synchronized (objCuenta) {
-            for (int i=1;i<=10;i++){
-                if (i<=5){
-                    Extraccion ext = new Extraccion(objCuenta,1);
-                    ext.start();
-                    Introduccion intr = new Introduccion(objCuenta,1);
-                    intr.start();
-                }else{
-                    Introduccion intr = new Introduccion(objCuenta,1);
-                    intr.start(); 
-                }
-            }
-        }
+        Extraccion ext = new Extraccion(objCuenta,1);
+        Introduccion intr = new Introduccion(objCuenta,1);
+        
+        ext.start();
+        intr.start();
         
         System.out.println("Saldo que tendria que tener 955");
-        System.out.println(objCuenta.toString());
+        ext.join();
+        intr.join();
+        System.out.println("Saldo final = "+objCuenta.getSaldo());
     }
     
 }
