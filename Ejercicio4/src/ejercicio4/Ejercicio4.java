@@ -8,6 +8,12 @@ package ejercicio4;
  */
 public class Ejercicio4 {
 
+    /**
+     * No metodo main instancianse as clases dos fios e arrancanse os 3 fios.
+     * No exercicio pide facer a suma do 1 ao 1000. Para controlar o correcto 
+     * funcionamento do codigo, farase so do 1 o 10.
+     * @param args 
+     */
     public static void main(String[] args) {
         Fio1 f1 = new Fio1();
         Fio2 f2 = new Fio2();

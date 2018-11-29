@@ -1,7 +1,14 @@
 package ejercicio4;
 
 public class Fio3 extends Thread{
-     
+    
+    /**
+     * Este metodo sobrescribe o metodo run() da clase Thread.
+     * Este metodo indica que comeza o Fio3. Logo ten un bucle onde se suman 
+     * os numeros que rematan en 2 ou en 3 dos primerios 10 numeros enteiros.
+     * Antes de rematar o fio mostra a suma de todos os numeros que rematan en 
+     * 2 ou en 3.
+     */
     @Override
     public void run(){
         int count = 0;
