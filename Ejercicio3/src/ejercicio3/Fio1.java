@@ -5,6 +5,16 @@ import java.util.logging.Logger;
 
 public class Fio1 extends Thread{
      
+    /**
+     * Este metodo sobrescribe o metodo run() da clase Thread.
+     * Este metodo indica que se iniciou o fio con un saudo.
+     * Despois crea un fio fillo chamado fio2 e arrancao.
+     * Logo empeza un bucle de 10 iteracions onde se mostrara un mesaxe por
+     * cada iteracion. Despois de mostrar o mesaxe hay unha espera aleatoria.
+     * Cando chegue a ultima iteracion, antes de rematar o bucle faise un 
+     * join para asegurarse que o fio fillo remata antes co pai.
+     * Por ultmo indicamos que termina o fio.
+     */
     @Override
     public void run(){
         System.out.println("OLAAA! Son o Fio1");

@@ -12,6 +12,10 @@ package ejercicio3;
  */
 public class Ejercicio3 {
 
+    /**
+     * No metodo main instancianse a clase Fio1 e arrancanse o fio.
+     * @param args 
+     */
     public static void main(String[] args) {
         
         Fio1 f1 = new Fio1();

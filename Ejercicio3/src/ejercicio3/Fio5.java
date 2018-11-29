@@ -4,7 +4,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Fio5 extends Fio4{
-     
+    
+    /**
+     * Este metodo sobrescribe o metodo run() da clase Thread.
+     * Este metodo indica que se iniciou o fio con un saudo.
+     * Logo empeza un bucle de 10 iteracions onde se mostrara un mesaxe por
+     * cada iteracion. Despois de mostrar o mesaxe hay unha espera aleatoria.
+     * Por ultmo indicamos que termina o fio.
+     */
     @Override
     public void run(){
         System.out.println("OLAAA! Son o Fio5");
