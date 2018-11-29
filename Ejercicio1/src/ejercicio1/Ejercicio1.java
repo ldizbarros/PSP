@@ -10,6 +10,10 @@ package ejercicio1;
  */
 public class Ejercicio1 {
 
+    /**
+     * Desde o main, instancianse e inicializanse os dous fios.
+     * @param args 
+     */
     public static void main(String[] args) {
         
         Fio1 f1 = new Fio1();
