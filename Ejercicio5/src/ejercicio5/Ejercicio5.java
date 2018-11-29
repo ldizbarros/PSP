@@ -12,6 +12,15 @@ package ejercicio5;
  */
 public class Ejercicio5 {
 
+    /**
+     * O metodo main executa as duas version do exercicio.
+     * A version A executa primeiro o fio2 e logo fai un join para que asi
+     * sempre se execute antes o fio2 co fio1
+     * A version B utiliza as prioridades para facer que se execute o fio2
+     * antes co fio1.
+     * @param args
+     * @throws InterruptedException 
+     */
     public static void main(String[] args) throws InterruptedException {
         
         //VERSION A
