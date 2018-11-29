@@ -9,6 +9,10 @@ package ejercicio2;
  */
 public class Ejercicio2 {
 
+    /**
+     * No metodo main instancianse a clase dos fios e arrancanse os 4 fios.
+     * @param args 
+     */
     public static void main(String[] args) {
         
         Fio1 f1 = new Fio1();

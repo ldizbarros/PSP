@@ -5,6 +5,11 @@ import java.util.logging.Logger;
 
 public class Fio1 extends Thread{
     
+    /**
+     * Este metodo sobrescribe o metodo run() da clase Thread.
+     * Este metodo mostra o nome do Fio1 5 veces e despois ten un 
+     * descanso de un segundo.
+     */
     @Override
     public void run(){
         for (int i=1;i<=5;i++){
