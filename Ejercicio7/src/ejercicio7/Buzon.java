@@ -48,7 +48,7 @@ public class Buzon {
      * de que acabo de escribir.
      */
     public synchronized void escribirMensaje(String mensaje) throws InterruptedException{
-        escribiendo=true;
+        
         if (leyendo==true){
             System.out.println("Esta leyendo. Esperando para escribir...");
             wait();
@@ -57,6 +57,7 @@ public class Buzon {
             System.out.println("Esta lleno el buzon. Esperando para escribir...");
             wait();
         }
+        escribiendo=true;
         this.mensaje = mensaje;
         System.out.println("MENSAJE ESCRITO");
         vacio=false;
@@ -72,7 +73,7 @@ public class Buzon {
      * Por ultimo lee el mensaje y lo elimina y avisa que ha terminado de leer.
      */
     public synchronized void leerMensaje() throws InterruptedException{
-        leyendo=true;
+       
         if (escribiendo==true){
             System.out.println("Esta escribiendo. Esperando para leer...");
             wait();
@@ -81,6 +82,7 @@ public class Buzon {
             System.out.println("Esta vacio el mensaje. Esperando para leer...");
             wait();
         }
+         leyendo=true;
         System.out.println("MENSAJE --> "+mensaje);
         this.mensaje="";
         vacio = true;
