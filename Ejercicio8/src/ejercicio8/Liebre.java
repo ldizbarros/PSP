@@ -33,9 +33,13 @@ public class Liebre extends Thread{
     public void run(){
         while(posicion<70){
             try {
-                posicion=carrera.movimientoLiebre(posicion);
-                System.out.println("LIEBRE --> Posicion: "+posicion);
-                this.sleep(1000);
+                if (Carrera.ganador==true){
+                    this.stop();
+                }else{
+                    posicion=carrera.movimientoLiebre(posicion);
+                    System.out.println("LIEBRE --> Posicion: "+posicion);
+                    this.sleep(1000);
+                }
             } catch (InterruptedException ex) {
                 Logger.getLogger(Liebre.class.getName()).log(Level.SEVERE, null, ex);
             }

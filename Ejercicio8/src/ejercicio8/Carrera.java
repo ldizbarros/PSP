@@ -9,7 +9,7 @@ public class Carrera {
     
     private boolean avanzaLiebre=false;
     private boolean avanzaTortuga=false;
-    private boolean ganador=false;
+    public static boolean ganador=false;
     
     /**
      * Este metodo define el movimiento de la liebre.
@@ -86,8 +86,10 @@ public class Carrera {
     public void ganador(String ganador){
         if (ganador.equalsIgnoreCase("liebre")){
             System.out.println("HA GANADO LA LIEBRE");
+            this.ganador=true;
         }else{
             System.out.println("HA GANADO LA TORTUGA");
+            this.ganador=true;
         }
     }
 }

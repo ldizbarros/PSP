@@ -33,9 +33,13 @@ public class Tortuga extends Thread{
     public void run(){
         while(posicion<70){
             try {
-                posicion=carrera.movimientoTortuga(posicion);
-                System.out.println("TORTUGA --> Posicion: "+posicion);
-                this.sleep(1000);
+                if (Carrera.ganador==true){
+                    this.stop();
+                }else{
+                    posicion=carrera.movimientoTortuga(posicion);
+                    System.out.println("TORTUGA --> Posicion: "+posicion);
+                    this.sleep(1000);
+                }
             } catch (InterruptedException ex) {
                 Logger.getLogger(Liebre.class.getName()).log(Level.SEVERE, null, ex);
             }
