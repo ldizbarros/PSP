@@ -25,7 +25,7 @@ public class SocketClientEj2 {
 	clienteSocket.connect(direccion);
        
         OutputStream output=clienteSocket.getOutputStream();
-        String mensaje="1 1 1 1 1";
+        String mensaje="1 1 1 1 1 ";
         output.write(mensaje.getBytes());
         
         reciviendo=true;
