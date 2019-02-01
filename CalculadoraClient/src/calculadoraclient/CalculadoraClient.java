@@ -87,7 +87,7 @@ public class CalculadoraClient {
 
         System.out.print("El resultado de la operacion es: ");
         System.out.println(new String(mensajeRe));
-
+       
         if (leer == -1) {
             reciviendo = false;
         }
