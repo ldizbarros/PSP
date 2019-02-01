@@ -64,24 +64,28 @@ public class CalculadoraServer {
             e2.getMessage();   
         }
         
-        switch(operacion){
-            case 1:
-                resultado = num1+num2;
-                break;
-            case 2:
-                resultado = num1-num2;
-                break;
-            case 3:
-                resultado = num1*num2;
-                break;
-            case 4:
-                resultado = num1/num2;
-                break;
-            case 5:
-                resultado = (int) Math.sqrt(num1);
-                break;
-            default:
-                System.out.println("Se ha producido un error en la operacion recibida");
+        try{   
+            switch (operacion) {
+                case 1:
+                    resultado = num1 + num2;
+                    break;
+                case 2:
+                    resultado = num1 - num2;
+                    break;
+                case 3:
+                    resultado = num1 * num2;
+                    break;
+                case 4:
+                    resultado = num1 / num2;
+                    break;
+                case 5:
+                    resultado = (int) Math.sqrt(num1);
+                    break;
+                default:
+                    System.out.println("Se ha producido un error en la operacion recibida");
+            }
+        }catch(ArithmeticException ex){
+            System.out.println("La operacion introducida no es posible realizarla");
         }
         
         System.out.println("El resultado es: "+String.valueOf(resultado));
