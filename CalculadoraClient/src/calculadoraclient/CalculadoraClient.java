@@ -54,7 +54,7 @@ public class CalculadoraClient {
                          + "    4 - Division\n"
                          + "    5 - Raiz\n");
                 System.out.print("Introduce el numero de referencia --> ");
-                operacion = sc.nextShort();
+                operacion = sc.nextInt();
                 if (operacion!=1 || operacion!=2 || operacion!=3 || operacion!=4 ||operacion!=5){
                     continue;
                 }
@@ -65,15 +65,15 @@ public class CalculadoraClient {
 
         if (operacion == 5) {
             System.out.print("Introduce el operando --> ");
-            short num1 = sc.nextShort();
-            String mensaje = operacion + "," + num1;
+            int num1 = sc.nextInt();
+            String mensaje = operacion + ";" + num1+";";
             output.write(mensaje.getBytes());
         } else {
             System.out.print("Introduce el primer operando --> ");
-            short num1 = sc.nextShort();
+            int num1 = sc.nextInt();
             System.out.print("Introduce el segundo operando --> ");
-            short num2 = sc.nextShort();
-            String mensaje = operacion + "," + num1 + "," + num2+",";
+            int num2 = sc.nextInt();
+            String mensaje = operacion + ";" + num1 + ";" + num2+";";
             output.write(mensaje.getBytes());
         }
 
