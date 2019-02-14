@@ -52,9 +52,10 @@ public class CalculadoraServer {
         //Mostramos el mensaje
         System.out.println("Cadena recibida: "+new String(mensajeRe));
 
-        int resultado = 0,operacion = 0,num1 = 0,num2 = 0;
+        double resultado = 0,num1 = 0,num2 = 0;
+        int operacion = 0;
         String cadenaRecibida = new String(mensajeRe);
-        String [] cadena =cadenaRecibida.split(",");
+        String [] cadena =cadenaRecibida.split(";");
         
         try{
             operacion = Integer.valueOf(cadena[0]);
@@ -64,34 +65,45 @@ public class CalculadoraServer {
             e2.getMessage();   
         }
         
+        String mensaje="";
+        
         try{   
             switch (operacion) {
                 case 1:
                     resultado = num1 + num2;
+                    mensaje=String.valueOf(resultado);
                     break;
                 case 2:
                     resultado = num1 - num2;
+                    mensaje=String.valueOf(resultado);
                     break;
                 case 3:
                     resultado = num1 * num2;
+                    mensaje=String.valueOf(resultado);
                     break;
                 case 4:
-                    resultado = num1 / num2;
+                    resultado= num1 / num2;
+                    mensaje=String.valueOf(resultado);
                     break;
                 case 5:
-                    resultado = (int) Math.sqrt(num1);
+                    if (num1>0){
+                        resultado = (int) Math.sqrt(num1);
+                    }else{
+                        mensaje="Error!";
+                    }
                     break;
                 default:
                     System.out.println("Se ha producido un error en la operacion recibida");
+                    mensaje="Se ha producido un error en la operacion recibida";
             }
         }catch(ArithmeticException ex){
             System.out.println("La operacion introducida no es posible realizarla");
+            mensaje="La operacion introducida no es posible realizarla";
         }
         
         System.out.println("El resultado es: "+String.valueOf(resultado));
             
         OutputStream output=newSocket.getOutputStream();
-        String mensaje=String.valueOf(resultado);
         output.write(mensaje.getBytes());
         System.out.println("Mensaje enviado");
 
