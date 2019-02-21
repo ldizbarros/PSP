@@ -44,8 +44,10 @@ public class CalculadoraClient {
        
         int operacion=-1;
         
+        //Se pediran datos hasta que el usuario introduzca 0
         while(operacion!=0){
             try{
+                //Recogemos la operacion a realizar
                 sc = new Scanner(System.in);
                 System.out.println("Introduzca el tipo de operacion a realizar:\n"
                          + "    1 - Suma\n"
@@ -57,16 +59,22 @@ public class CalculadoraClient {
                 System.out.print("Introduce el numero de referencia --> ");
                 operacion = sc.nextInt();
 
+                //Segun la opcion introducida se creara un string que se enviara 
+                //al servidor para hacer la cuenta
                 if (operacion==0){
+                    //Si el usuario introduce 0 se enviara un mensaje que avise
+                    //al servidor que se cierre la conexion y se cerrara el cliente tambien
                     String mensaje = String.valueOf(operacion);
                     output.write(mensaje.getBytes());
                     break;
                 }else if (operacion == 5) {
+                    //Se crea un String para la raiz que tendra solo un numero
                     System.out.print("Introduce el operando --> ");
                     int num1 = sc.nextInt();
                     String mensaje = operacion + ";" + num1+";";
                     output.write(mensaje.getBytes());
                 } else {
+                    //Se crea un String con los dos opereados para el resto de operaciones
                     System.out.print("Introduce el primer operando --> ");
                     int num1 = sc.nextInt();
                     System.out.print("Introduce el segundo operando --> ");
@@ -81,7 +89,8 @@ public class CalculadoraClient {
 
                 byte[] mensajeRe = new byte[20];
                 input.read(mensajeRe);
-
+                
+                //Mostramos el resultado recibido
                 System.out.print("El resultado de la operacion es: ");
                 System.out.println(new String(mensajeRe));
 
