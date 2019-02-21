@@ -53,8 +53,12 @@ public class CalculadoraServer {
             int leer = input.read(mensajeRe);
                 
             cadenaRecibida = new String(mensajeRe);
-
-            if (cadenaRecibida.contains("0")){
+            
+            //Si la cadena recivida empieza por un cero entonces se sale del bucle 
+            //y se cierra el socket  
+            char esCero = cadenaRecibida.charAt(0);
+          
+            if (esCero == '0'){
                 break;
             }else{
                 //Mostramos el mensaje
@@ -66,6 +70,8 @@ public class CalculadoraServer {
                 String [] cadena =cadenaRecibida.split(";");
 
                 try{
+                    //Se combierte el String recibido en los numeros para poder operar
+                    //con ellos
                     operacion = Integer.valueOf(cadena[0]);
                     num1 = Integer.valueOf(cadena[1]);
                     num2 = Integer.valueOf(cadena[2]);
@@ -74,7 +80,8 @@ public class CalculadoraServer {
                 }
 
                 String mensaje="";
-
+                
+                //Se realiza la operacion 
                 try{   
                     switch (operacion) {
                         case 1:
