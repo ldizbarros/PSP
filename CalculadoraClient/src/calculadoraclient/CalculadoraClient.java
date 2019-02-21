@@ -64,7 +64,7 @@ public class CalculadoraClient {
                 if (operacion==0){
                     //Si el usuario introduce 0 se enviara un mensaje que avise
                     //al servidor que se cierre la conexion y se cerrara el cliente tambien
-                    String mensaje = String.valueOf(operacion);
+                    String mensaje = String.valueOf(operacion+";");
                     output.write(mensaje.getBytes());
                     break;
                 }else if (operacion == 5) {
