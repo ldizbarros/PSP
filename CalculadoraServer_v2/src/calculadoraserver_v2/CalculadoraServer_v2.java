@@ -1,8 +1,6 @@
 package calculadoraserver_v2;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -42,14 +40,19 @@ public class CalculadoraServer_v2 {
 	serverSocket.bind(addr);
         
         while(true){
-            new Cliente(serverSocket).run();  
+            //El socket del servidor se queda escuchando en la direccion deseada.
+            //En cuenato reciba una conexion se crea el objeto Socket
+            System.out.println("Aceptando conexiones");
+            Socket newSocket= serverSocket.accept();
+            
+            new Cliente(newSocket).run();  
         }
         
         //Se cierra el socket Servidor
-	//System.out.println("Cerrando el socket servidor");
-        //serverSocket.close();
-
-	//System.out.println("Terminado");
+//	System.out.println("Cerrando el socket servidor");
+//        serverSocket.close();
+//
+//	System.out.println("Terminado");
     }
     
 }

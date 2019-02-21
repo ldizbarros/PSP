@@ -3,19 +3,13 @@ package calculadoraserver_v2;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Cliente extends Thread{
     
-    public Cliente(ServerSocket serverSocket) throws IOException{
-        //El socket del servidor se queda escuchando en la direccion deseada.
-        //En cuenato reciba una conexion se crea el objeto Socket
-	System.out.println("Aceptando conexiones");
-        Socket newSocket= serverSocket.accept();
-           
+    public Cliente(Socket socket) throws IOException{
         //Se crea un stream que recibira los datos que envie el cliente
-        InputStream input = newSocket.getInputStream();
+        InputStream input = socket.getInputStream();
         System.out.println("Conexión recibida");
             
         byte[] mensajeRe=new byte[20];
@@ -59,7 +53,8 @@ public class Cliente extends Thread{
                     break;
                 case 5:
                     if (num1>0){
-                        resultado = (int) Math.sqrt(num1);
+                        resultado = (double) Math.sqrt(num1);
+                        mensaje=String.valueOf(resultado);
                     }else{
                         mensaje="Error!";
                     }
@@ -75,13 +70,13 @@ public class Cliente extends Thread{
         
         System.out.println("El resultado es: "+String.valueOf(resultado));
             
-        OutputStream output=newSocket.getOutputStream();
+        OutputStream output=socket.getOutputStream();
         output.write(mensaje.getBytes());
         System.out.println("Mensaje enviado");
         
         //Se cierra el socket que lee 
 	System.out.println("Cerrando el nuevo socket");
-	newSocket.close();
+	socket.close();
     }
     
 }
