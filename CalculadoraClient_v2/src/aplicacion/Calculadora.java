@@ -386,6 +386,10 @@ public class Calculadora extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Se cierra el socket y la aplicacion al clickar este boton
+     * @param evt 
+     */
     private void jBOFFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBOFFActionPerformed
         try {
             MetodosCalculadora.cerrarSocket();
@@ -395,6 +399,11 @@ public class Calculadora extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jBOFFActionPerformed
 
+    /**
+     * Limpia la caja de texto y vuelve a realizar la conexin con el servidor 
+     * para futuras operaciones
+     * @param evt 
+     */
     private void jBCeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCeroActionPerformed
         jTFCalculos.setText("");
         String ip = txtIPServer.getText();
@@ -410,6 +419,10 @@ public class Calculadora extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jBCeroActionPerformed
 
+    /**
+     * ESTOS METODOS SE ENCARGAN DE PONER TEXTO EN LA CAJA 
+     * @param evt 
+     */
     private void jB1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB1ActionPerformed
         jTFCalculos.setText(jTFCalculos.getText()+"1");
     }//GEN-LAST:event_jB1ActionPerformed
@@ -455,6 +468,14 @@ public class Calculadora extends javax.swing.JFrame {
         operando=5;
     }//GEN-LAST:event_jBRaizActionPerformed
 
+    /**
+     * En este metodo comprueba que la caja de texto no esta vacia y que tiene 
+     * valores acpetables. Luego llama al metodo operacion, pasandole los 
+     * parametros adecuados despues de parsearlos.
+     * Despues llama al metodo recibirResultado que devolvera la operacion y 
+     * se mostrara el texto por pantalla
+     * @param evt 
+     */
     private void jBIgualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBIgualActionPerformed
         String calculo = jTFCalculos.getText();
         if (calculo==null){
@@ -520,6 +541,10 @@ public class Calculadora extends javax.swing.JFrame {
         jTFCalculos.setText(resultado);
     }//GEN-LAST:event_jBIgualActionPerformed
 
+    /**
+     * ESTOS METODOS ESTABLECEN EL TIPO DE OPERACION A REALIZAR
+     * @param evt 
+     */
     private void jBDividirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDividirActionPerformed
         jTFCalculos.setText(jTFCalculos.getText()+"/");
         operando=4;
@@ -540,6 +565,10 @@ public class Calculadora extends javax.swing.JFrame {
         operando=1;
     }//GEN-LAST:event_jBMasActionPerformed
 
+    /**
+     * Este metodo establece la conexion con el socket
+     * @param evt 
+     */
     private void btnSERVERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSERVERActionPerformed
         String ip = txtIPServer.getText();
         String port = txtPORTServer.getText();

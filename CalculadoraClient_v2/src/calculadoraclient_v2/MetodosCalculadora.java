@@ -14,6 +14,13 @@ public class MetodosCalculadora {
     
     private static Socket clienteSocket;
     
+    /**
+     * Este metodo crea el String y lo envia al servidor para realizar la operacion
+     * @param operando tipo de operacion
+     * @param num1 primer operado
+     * @param num2 segundo operando
+     * @throws IOException 
+     */
     public static void operacion (int operando, int num1, int num2) throws IOException{
         String mensaje=null;
         OutputStream output=clienteSocket.getOutputStream();
@@ -26,6 +33,12 @@ public class MetodosCalculadora {
         }
     }
     
+    /**
+     * Este metodo hace la conexion con el servidor 
+     * @param ip ip del servidor
+     * @param port puerto del servidor
+     * @throws IOException 
+     */
     public static void conexionSocket(String ip, String port) throws IOException{
         //Se crea el cocket del cliente
         System.out.println("Creando socket cliente");
@@ -37,6 +50,11 @@ public class MetodosCalculadora {
 	clienteSocket.connect(direccion);
     }
     
+    /**
+     * Este metodo recibe el resultado del servidor 
+     * @return duvuelve el resultado de la operacion
+     * @throws IOException 
+     */
     public static String recibirResultado() throws IOException{
         boolean reciviendo= false;
         InputStream input = clienteSocket.getInputStream();
@@ -52,6 +70,10 @@ public class MetodosCalculadora {
         return new String(mensajeRe);
     }
     
+    /**
+     * Se cierra el socket del cliente
+     * @throws IOException 
+     */
     public static void cerrarSocket() throws IOException{
         clienteSocket.close();
     }
