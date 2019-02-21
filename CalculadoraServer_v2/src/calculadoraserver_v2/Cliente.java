@@ -24,6 +24,7 @@ public class Cliente extends Thread{
         String [] cadena =cadenaRecibida.split(";");
         
         try{
+            //Parseamos la cadena recibida
             operacion = Integer.valueOf(cadena[0]);
             num1 = Integer.valueOf(cadena[1]);
             num2 = Integer.valueOf(cadena[2]);
@@ -33,6 +34,7 @@ public class Cliente extends Thread{
         
         String mensaje="";
         
+        //Hacemos las operaciones y elaborames el mensaje/resultado de la respuesta 
         try{   
             switch (operacion) {
                 case 1:

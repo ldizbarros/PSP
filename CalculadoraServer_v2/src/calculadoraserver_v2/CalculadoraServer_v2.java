@@ -45,6 +45,7 @@ public class CalculadoraServer_v2 {
             System.out.println("Aceptando conexiones");
             Socket newSocket= serverSocket.accept();
             
+            //Se crea un hilo por cada conexion al server
             new Cliente(newSocket).run();  
         }
         
