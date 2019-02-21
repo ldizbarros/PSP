@@ -38,13 +38,13 @@ public class CalculadoraClient {
 	InetSocketAddress direccion=new InetSocketAddress("localhost",6666);
 	clienteSocket.connect(direccion);
        
-        //ENVIAR
+        //ENVIAR OPERACION
         Scanner sc = null;
         OutputStream output=clienteSocket.getOutputStream();
        
-        int operacion=0;
+        int operacion=-1;
         
-        while(operacion==0 || operacion>5){
+        while(operacion!=0){
             try{
                 sc = new Scanner(System.in);
                 System.out.println("Introduzca el tipo de operacion a realizar:\n"
@@ -52,44 +52,42 @@ public class CalculadoraClient {
                          + "    2 - Resta\n"
                          + "    3 - Multiplicacion\n"
                          + "    4 - Division\n"
-                         + "    5 - Raiz\n");
+                         + "    5 - Raiz\n"
+                         + "    0 - Salir\n");
                 System.out.print("Introduce el numero de referencia --> ");
                 operacion = sc.nextInt();
-                if (operacion!=1 || operacion!=2 || operacion!=3 || operacion!=4 ||operacion!=5){
-                    continue;
+
+                if (operacion==0){
+                    String mensaje = String.valueOf(operacion);
+                    output.write(mensaje.getBytes());
+                    break;
+                }else if (operacion == 5) {
+                    System.out.print("Introduce el operando --> ");
+                    int num1 = sc.nextInt();
+                    String mensaje = operacion + ";" + num1+";";
+                    output.write(mensaje.getBytes());
+                } else {
+                    System.out.print("Introduce el primer operando --> ");
+                    int num1 = sc.nextInt();
+                    System.out.print("Introduce el segundo operando --> ");
+                    int num2 = sc.nextInt();
+                    String mensaje = operacion + ";" + num1 + ";" + num2+";";
+                    output.write(mensaje.getBytes());
                 }
+                
+                //RECIBIR RESULTADO
+                InputStream input = clienteSocket.getInputStream();
+                System.out.println("Conexión recibida");
+
+                byte[] mensajeRe = new byte[20];
+                input.read(mensajeRe);
+
+                System.out.print("El resultado de la operacion es: ");
+                System.out.println(new String(mensajeRe));
+
             }catch(InputMismatchException e){
                 System.out.println("Opcion introducida no válida");
             }   
-        }
-
-        if (operacion == 5) {
-            System.out.print("Introduce el operando --> ");
-            int num1 = sc.nextInt();
-            String mensaje = operacion + ";" + num1+";";
-            output.write(mensaje.getBytes());
-        } else {
-            System.out.print("Introduce el primer operando --> ");
-            int num1 = sc.nextInt();
-            System.out.print("Introduce el segundo operando --> ");
-            int num2 = sc.nextInt();
-            String mensaje = operacion + ";" + num1 + ";" + num2+";";
-            output.write(mensaje.getBytes());
-        }
-
-        
-        //RECIBIR
-        InputStream input = clienteSocket.getInputStream();
-        System.out.println("Conexión recibida");
-
-        byte[] mensajeRe = new byte[20];
-        int leer = input.read(mensajeRe);
-
-        System.out.print("El resultado de la operacion es: ");
-        System.out.println(new String(mensajeRe));
-       
-        if (leer == -1) {
-            reciviendo = false;
         }
 
         //Cerramos el socket
