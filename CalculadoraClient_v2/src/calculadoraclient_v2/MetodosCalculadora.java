@@ -3,6 +3,7 @@ package calculadoraclient_v2;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.ConnectException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
@@ -40,14 +41,19 @@ public class MetodosCalculadora {
      * @throws IOException 
      */
     public static void conexionSocket(String ip, String port) throws IOException{
-        //Se crea el cocket del cliente
-        System.out.println("Creando socket cliente");
-        clienteSocket=new Socket();
+        try{
+             //Se crea el cocket del cliente
+            System.out.println("Creando socket cliente");
+            clienteSocket=new Socket();
         
-        //Se establece la direccion del socket cliente
-	System.out.println("Estableciendo la conexión");	
-	InetSocketAddress direccion=new InetSocketAddress(ip,Integer.parseInt(port));
-	clienteSocket.connect(direccion);
+            //Se establece la direccion del socket cliente
+            System.out.println("Estableciendo la conexión");	
+            InetSocketAddress direccion=new InetSocketAddress(ip,Integer.parseInt(port));
+            clienteSocket.connect(direccion);
+        }catch(ConnectException e){
+            System.out.println("Error en la conexion. No se ha podido conectar al servidor");
+        }
+       
     }
     
     /**
