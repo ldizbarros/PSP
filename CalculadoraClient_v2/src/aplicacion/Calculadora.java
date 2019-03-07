@@ -26,6 +26,22 @@ public class Calculadora extends javax.swing.JFrame {
     public Calculadora() {
         initComponents();
         this.setLocationRelativeTo(this);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+ 
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                try {
+                    MetodosCalculadora.cerrarSocket();
+                } catch(NullPointerException e){
+                    System.exit(0);
+                }
+                catch (IOException ex) {
+                    JOptionPane.showMessageDialog(jPanelBotones, "Se ha producido un error al cerrar la conexion");
+                }
+                System.exit(0);
+            }
+        });
     }
 
     /**
@@ -258,53 +274,56 @@ public class Calculadora extends javax.swing.JFrame {
             .addGroup(jPanelBotonesLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBotonesLayout.createSequentialGroup()
-                        .addGroup(jPanelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanelBotonesLayout.createSequentialGroup()
-                                .addComponent(jB0, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(31, 31, 31)
-                                .addComponent(jBIgual, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanelBotonesLayout.createSequentialGroup()
-                                .addComponent(jB1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(31, 31, 31)
-                                .addComponent(jB2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanelBotonesLayout.createSequentialGroup()
-                                .addComponent(jB4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(31, 31, 31)
-                                .addComponent(jB5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanelBotonesLayout.createSequentialGroup()
-                                .addComponent(jB7, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(31, 31, 31)
-                                .addComponent(jB8, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(27, 27, 27)
-                        .addGroup(jPanelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtPORTServer, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanelBotonesLayout.createSequentialGroup()
-                                .addGroup(jPanelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jB3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jB6, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jBRaiz, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(45, 45, 45)
-                                .addGroup(jPanelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jBMultiplicar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jBMenos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanelBotonesLayout.createSequentialGroup()
-                                .addComponent(jB9, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(45, 45, 45)
-                                .addComponent(jBDividir, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(lblServerPort)
-                    .addGroup(jPanelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jBMas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBotonesLayout.createSequentialGroup()
-                            .addComponent(lblServerIP)
-                            .addGap(18, 18, 18)
-                            .addComponent(txtIPServer, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanelBotonesLayout.createSequentialGroup()
                         .addComponent(jBCero, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jBOFF)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSERVER)))
+                        .addComponent(btnSERVER))
+                    .addGroup(jPanelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanelBotonesLayout.createSequentialGroup()
+                            .addGroup(jPanelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanelBotonesLayout.createSequentialGroup()
+                                    .addComponent(jB0, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(31, 31, 31)
+                                    .addComponent(jBIgual, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanelBotonesLayout.createSequentialGroup()
+                                    .addComponent(jB1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(31, 31, 31)
+                                    .addComponent(jB2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanelBotonesLayout.createSequentialGroup()
+                                    .addComponent(jB4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(31, 31, 31)
+                                    .addComponent(jB5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanelBotonesLayout.createSequentialGroup()
+                                    .addComponent(jB7, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(31, 31, 31)
+                                    .addComponent(jB8, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGap(40, 40, 40)
+                            .addGroup(jPanelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanelBotonesLayout.createSequentialGroup()
+                                    .addGroup(jPanelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jB3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jB6, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jBRaiz, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(32, 32, 32)
+                                    .addGroup(jPanelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jBMultiplicar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jBMenos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanelBotonesLayout.createSequentialGroup()
+                                    .addComponent(jB9, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(32, 32, 32)
+                                    .addComponent(jBDividir, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jPanelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanelBotonesLayout.createSequentialGroup()
+                                .addComponent(lblServerPort)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtPORTServer, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jBMas, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanelBotonesLayout.createSequentialGroup()
+                                .addComponent(lblServerIP)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtIPServer, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         jPanelBotonesLayout.setVerticalGroup(
@@ -332,10 +351,11 @@ public class Calculadora extends javax.swing.JFrame {
                             .addComponent(jB9, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jBDividir, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jB6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jB5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jB4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jB5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jB4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBotonesLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jBMultiplicar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -350,9 +370,8 @@ public class Calculadora extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jBMas, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jBRaiz, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jBIgual, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jBRaiz, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBIgual, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jB0, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -394,7 +413,7 @@ public class Calculadora extends javax.swing.JFrame {
         try {
             MetodosCalculadora.cerrarSocket();
         } catch (IOException ex) {
-            Logger.getLogger(Calculadora.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(jPanelBotones, "Se ha producido un error al cerrar la conexion");
         }
         System.exit(0);
     }//GEN-LAST:event_jBOFFActionPerformed
@@ -406,17 +425,6 @@ public class Calculadora extends javax.swing.JFrame {
      */
     private void jBCeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCeroActionPerformed
         jTFCalculos.setText("");
-        String ip = txtIPServer.getText();
-        String port = txtPORTServer.getText();
-        if (ip.equalsIgnoreCase("localhost") || ip.equalsIgnoreCase("127.0.0.1")){
-            try {
-                MetodosCalculadora.conexionSocket(ip, port);
-            } catch (IOException ex) {
-                Logger.getLogger(Calculadora.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }else{
-            JOptionPane.showMessageDialog(jPanelBotones, "No existe ningun server con la ip introducida");
-        }
     }//GEN-LAST:event_jBCeroActionPerformed
 
     /**
@@ -478,67 +486,111 @@ public class Calculadora extends javax.swing.JFrame {
      */
     private void jBIgualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBIgualActionPerformed
         String calculo = jTFCalculos.getText();
-        if (calculo==null){
+        if (calculo==""){
             JOptionPane.showMessageDialog(jPanelBotones, "No se a introducido ningun numero");
         }else{
-            if (operando==0){
-                JOptionPane.showMessageDialog(jPanelBotones, "No se a introducido ningun operando");
+            if (calculo.contains(".")){
+                JOptionPane.showMessageDialog(jPanelBotones, "No se permiten operaciones con decimales.");
+                jTFCalculos.setText("");
             }else{
-                if (operando==1){
-                    String[] numeros = calculo.split(Pattern.quote("+"));
-                    int num1 = Integer.parseInt(numeros[0]);
-                    int num2 = Integer.parseInt(numeros[1]);
-                    try {
-                        MetodosCalculadora.operacion(operando, num1, num2);
-                    } catch (IOException ex) {
-                        Logger.getLogger(Calculadora.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }else if (operando==2){
-                    String[] numeros = calculo.split(Pattern.quote("-"));
-                    int num1 = Integer.parseInt(numeros[0]);
-                    int num2 = Integer.parseInt(numeros[1]);
-                    try {
-                        MetodosCalculadora.operacion(operando, num1, num2);
-                    } catch (IOException ex) {
-                        Logger.getLogger(Calculadora.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }else if (operando==3){
-                    String[] numeros = calculo.split(Pattern.quote("*"));
-                    int num1 = Integer.parseInt(numeros[0]);
-                    int num2 = Integer.parseInt(numeros[1]);
-                    try {
-                        MetodosCalculadora.operacion(operando, num1, num2);
-                    } catch (IOException ex) {
-                        Logger.getLogger(Calculadora.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }else if (operando==4){
-                    String[] numeros = calculo.split(Pattern.quote("/"));
-                    int num1 = Integer.parseInt(numeros[0]);
-                    int num2 = Integer.parseInt(numeros[1]);
-                    try {
-                        MetodosCalculadora.operacion(operando, num1, num2);
-                    } catch (IOException ex) {
-                        Logger.getLogger(Calculadora.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                if (operando==0){
+                    JOptionPane.showMessageDialog(jPanelBotones, "No se a introducido ningun operando");
                 }else{
-                    String[] numeros = calculo.split(Pattern.quote("Raiz"));
-                    int num1 = Integer.parseInt(numeros[0]);
-                    int num2 = 0;
-                    try {
-                        MetodosCalculadora.operacion(operando, num1, num2);
-                    } catch (IOException ex) {
-                        Logger.getLogger(Calculadora.class.getName()).log(Level.SEVERE, null, ex);
+                    if (operando==1){
+                        try {
+                            String[] numeros = calculo.split(Pattern.quote("+"));
+                            int num1 = Integer.parseInt(numeros[0]);
+                            int num2 = Integer.parseInt(numeros[1]);
+                            MetodosCalculadora.operacion(operando, num1, num2);
+                            String resultado="";
+                            try {
+                                resultado = MetodosCalculadora.recibirResultado();
+                                jTFCalculos.setText(resultado);
+                            } catch (IOException ex) {
+                                JOptionPane.showMessageDialog(jPanelBotones, "Se ha producido un error al recibir el resultado");
+                            }
+                        }catch(NumberFormatException e){
+                            System.out.println("Error en el formato");
+                        } 
+                        catch (IOException ex) {
+                            JOptionPane.showMessageDialog(jPanelBotones, "Se ha producido un error al enviar la informacion");
+                        }
+                    }else if (operando==2){
+                        try {
+                            String[] numeros = calculo.split(Pattern.quote("-"));
+                            int num1 = Integer.parseInt(numeros[0]);
+                            int num2 = Integer.parseInt(numeros[1]);
+                            MetodosCalculadora.operacion(operando, num1, num2);
+                            String resultado="";
+                            try {
+                                resultado = MetodosCalculadora.recibirResultado();
+                                jTFCalculos.setText(resultado);
+                            } catch (IOException ex) {
+                                JOptionPane.showMessageDialog(jPanelBotones, "Se ha producido un error al recibir el resultado");
+                            }
+                        }catch(NumberFormatException e){
+                            System.out.println("Error en el formato");
+                        }catch (IOException ex) {
+                            JOptionPane.showMessageDialog(jPanelBotones, "Se ha producido un error al enviar la informacion");
+                        }
+                    }else if (operando==3){
+                        try {
+                            String[] numeros = calculo.split(Pattern.quote("*"));
+                            int num1 = Integer.parseInt(numeros[0]);
+                            int num2 = Integer.parseInt(numeros[1]);
+                            MetodosCalculadora.operacion(operando, num1, num2);
+                            String resultado="";
+                            try {
+                                resultado = MetodosCalculadora.recibirResultado();
+                                jTFCalculos.setText(resultado);
+                            } catch (IOException ex) {
+                                JOptionPane.showMessageDialog(jPanelBotones, "Se ha producido un error al recibir el resultado");
+                            }
+                        } catch (IOException ex) {
+                            JOptionPane.showMessageDialog(jPanelBotones, "Se ha producido un error");
+                        }catch(NumberFormatException e){
+                            System.out.println("Error en el formato");
+                        } 
+                    }else if (operando==4){
+                        try {
+                            String[] numeros = calculo.split(Pattern.quote("/"));
+                            int num1 = Integer.parseInt(numeros[0]);
+                            int num2 = Integer.parseInt(numeros[1]);
+                            MetodosCalculadora.operacion(operando, num1, num2);
+                            String resultado="";
+                            try {
+                                resultado = MetodosCalculadora.recibirResultado();
+                                jTFCalculos.setText(resultado);
+                            } catch (IOException ex) {
+                                JOptionPane.showMessageDialog(jPanelBotones, "Se ha producido un error al recibir el resultado");
+                            }
+                        }catch(NumberFormatException e){
+                            System.out.println("Error en el formato");
+                        }catch (IOException ex) {
+                            JOptionPane.showMessageDialog(jPanelBotones, "Se ha producido un error al enviar la informacion");
+                        }
+                    }else{
+                        try {
+                            String[] numeros = calculo.split(Pattern.quote("Raiz"));
+                            int num1 = Integer.parseInt(numeros[0]);
+                            int num2 = 0;
+                            MetodosCalculadora.operacion(operando, num1, num2);
+                            String resultado="";
+                            try {
+                                resultado = MetodosCalculadora.recibirResultado();
+                                jTFCalculos.setText(resultado);
+                            } catch (IOException ex) {
+                                JOptionPane.showMessageDialog(jPanelBotones, "Se ha producido un error al recibir el resultado");
+                            }
+                        }catch(NumberFormatException e){
+                            System.out.println("Error en el formato");
+                        }catch (IOException ex) {
+                            JOptionPane.showMessageDialog(jPanelBotones, "Se ha producido un error al enviar la informacion");
+                        }
                     }
                 }
             }
         }
-        String resultado="";
-        try {
-            resultado = MetodosCalculadora.recibirResultado();
-        } catch (IOException ex) {
-            Logger.getLogger(Calculadora.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        jTFCalculos.setText(resultado);
     }//GEN-LAST:event_jBIgualActionPerformed
 
     /**
@@ -572,14 +624,14 @@ public class Calculadora extends javax.swing.JFrame {
     private void btnSERVERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSERVERActionPerformed
         String ip = txtIPServer.getText();
         String port = txtPORTServer.getText();
-        if (ip.equalsIgnoreCase("localhost") || ip.equalsIgnoreCase("127.0.0.1")){
+        if (ip.equalsIgnoreCase("") || port.equalsIgnoreCase("")){
+           JOptionPane.showMessageDialog(jPanelBotones, "No se han introducido todos los campos.");
+        }else{
             try {
                 MetodosCalculadora.conexionSocket(ip, port);
             } catch (IOException ex) {
-                Logger.getLogger(Calculadora.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(jPanelBotones, "Se ha producido un error al establecer la conexion");
             }
-        }else{
-            JOptionPane.showMessageDialog(jPanelBotones, "No existe ningun server con la ip introducida");
         }
     }//GEN-LAST:event_btnSERVERActionPerformed
 

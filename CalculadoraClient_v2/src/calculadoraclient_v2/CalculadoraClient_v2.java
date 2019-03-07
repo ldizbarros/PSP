@@ -22,6 +22,7 @@ public class CalculadoraClient_v2 {
         
         Calculadora ventanaPrincipal = new Calculadora();
         ventanaPrincipal.setVisible(true);
+        
     }
     
 }
