@@ -22,38 +22,30 @@ import java.util.Scanner;
  */
 public class CalculadoraServer_v2 {
 
-    public static void main(String[] args) throws IOException {
-        boolean reciviendo = false;
-        //Creamos el socket del servidor
-        System.out.println("Creando socket servidor");
-	ServerSocket serverSocket=new ServerSocket();
-        
-        //Hacemos que el socket del servidor escuche en la direcion deseada
-        System.out.println("Realizando el bind");   
-        
+    public static void main(String[] args) {
         //Pedimos el puerto del servidor.
         Scanner sc = new Scanner(System.in);
         System.out.print("Introduzca el PUERTO del servidor --> ");
         int puerto = sc.nextInt();
         
-        InetSocketAddress addr=new InetSocketAddress("localhost",puerto);
-	serverSocket.bind(addr);
-        
-        while(true){
-            //El socket del servidor se queda escuchando en la direccion deseada.
-            //En cuenato reciba una conexion se crea el objeto Socket
-            System.out.println("Aceptando conexiones");
-            Socket newSocket= serverSocket.accept();
+        try {
+            //Creamos el socket del servidor
+            ServerSocket serverSocket=new ServerSocket();
+            InetSocketAddress addr=new InetSocketAddress("localhost",puerto);
+            serverSocket.bind(addr);
+            System.out.println("Socket Servidor creado");
             
-            //Se crea un hilo por cada conexion al server
-            new Cliente(newSocket).run();  
+            while(true){
+                //El socket del servidor se queda escuchando en la direccion deseada.
+                //En cuenato reciba una conexion se crea el objeto Socket
+                System.out.println("Aceptando conexiones");
+                Socket newSocket= serverSocket.accept();
+            
+                //Se crea un hilo por cada conexion al server
+                new Cliente(newSocket).start();  
+            }
+        } catch (IOException ex) {
+            System.out.println("Se ha producido un error en la conexion.");
         }
-        
-        //Se cierra el socket Servidor
-//	System.out.println("Cerrando el socket servidor");
-//        serverSocket.close();
-//
-//	System.out.println("Terminado");
-    }
-    
+    } 
 }
