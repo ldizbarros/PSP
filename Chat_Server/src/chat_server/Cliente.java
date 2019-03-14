@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Clase donde se define el hilo.
@@ -34,7 +32,7 @@ public class Cliente extends Thread{
                 input.read(mensajeRe);
                 //Mostramos el mensaje
                 String mensajeRecibido = new String(mensajeRe);
-                System.out.println("Se ha recibido el mesaje: "+mensajeRecibido);
+                System.out.println("Se ha recibido un mensaje: "+nickname+":"+mensajeRecibido);
                 if (mensajeRecibido.contains("/bye")){
                     ChatServer.listaClientes.remove(this);
                     System.out.println("Hay "+ChatServer.listaClientes.size()+" usuarios conectados");
