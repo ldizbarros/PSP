@@ -58,7 +58,7 @@ public class ChatServer {
             while(true){
                 //En cuenato reciba una conexion se crea el objeto Socket
                 Socket newSocket= serverSocket.accept();
-                if (listaClientes.size() <2) {
+                if (listaClientes.size() <10) {
                     System.out.println("Aceptando conexiones");
                     input = newSocket.getInputStream();
                     output = newSocket.getOutputStream();
