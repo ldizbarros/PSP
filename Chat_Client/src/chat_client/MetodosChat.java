@@ -23,7 +23,9 @@ public class MetodosChat {
     
     /**
      * Este metodo hace la conexion con el servidor.
-     * Crea el socket cliente y envia el nick del usuario
+     * Crea el socket cliente y envia el nick del usuario.
+     * Si recibe 'false' quiere decir que no hay sitio en el servidor
+     * por lo que no se conecta.
      * @param ip ip del servidor
      * @param port puerto del servidor
      * @throws IOException 
@@ -35,19 +37,27 @@ public class MetodosChat {
             //Se establece la conexion con el server	
             InetSocketAddress direccion=new InetSocketAddress(ip,Integer.parseInt(port));
             clienteSocket.connect(direccion);
-            System.out.println("Conexion Establecida con el servidor");
-            login.setVisible(false);
-            ChatRoom ventanaChat= new  ChatRoom();
-            ventanaChat.setVisible(true);
             
             output = clienteSocket.getOutputStream();
             input = clienteSocket.getInputStream();
+
+            byte[] mensajeRe = new byte[250];
+            input.read(mensajeRe);
+            String mensaje = new String(mensajeRe);
             
-            output.write(nickname.getBytes());
-            
-            //Iniciamos hilo para recibir mensajes
-            System.out.println("Empezamos Hilo.");
-            new RecibirMensajes(clienteSocket,input).start();
+            if (mensaje.contains("false")){         
+                JOptionPane.showMessageDialog(null, "El servidor no acepta mas conexiones.\nEspere a que se libere el servidor");
+            }else{
+                login.setVisible(false);
+                ChatRoom ventanaChat= new  ChatRoom();
+                ventanaChat.setVisible(true);
+
+                output.write(nickname.getBytes());
+                System.out.println("Conexion Establecida con el servidor");
+                //Iniciamos hilo para recibir mensajes
+                System.out.println("Empezamos Hilo.");
+                new RecibirMensajes(clienteSocket,input).start();
+            }
         }catch(ConnectException e){
             JOptionPane.showMessageDialog(null, "Error en la conexion.\n No se ha podido conectar al servidor");
         }
@@ -63,9 +73,13 @@ public class MetodosChat {
             if (mensaje.contains("/bye")){
                 MetodosChat.cerrarSocket();
             }else{
-                String enviar = mensaje+"\n";
-                output.write(enviar.getBytes());
-                System.out.println("Mensaje Enviado"); 
+                if (mensaje.equalsIgnoreCase("")){
+                    JOptionPane.showMessageDialog(null, "No ha introducido ningun mensaje");
+                }else{
+                    String enviar = mensaje+"\n";
+                    output.write(enviar.getBytes());
+                    System.out.println("Mensaje Enviado"); 
+                }
             }
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Se ha producido un error al enviar el mensaje");

@@ -5,13 +5,16 @@ import java.io.IOException;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Aplicacion del Chat
  * @author ldizbarros
  */
 public class ChatRoom extends javax.swing.JFrame {
 
     /**
-     * Creates new form Chat
+     * Creates new form ChatRoom.
+     * Aqui tenemos una funcion que recoge el evento de cerrar la ventana.
+     * Cuando se cierra la ventana se llama al metodo cerrarSocket para cerrar
+     * correctamente la conexion.
      */
     public ChatRoom() {
         initComponents();
@@ -50,8 +53,8 @@ public class ChatRoom extends javax.swing.JFrame {
         txtMensaje = new javax.swing.JTextArea();
         lblNotificaciones = new javax.swing.JLabel();
         btnEnviar = new javax.swing.JButton();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        txtChat = new javax.swing.JTextPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtChat = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,7 +77,9 @@ public class ChatRoom extends javax.swing.JFrame {
         });
 
         txtChat.setEditable(false);
-        jScrollPane4.setViewportView(txtChat);
+        txtChat.setColumns(20);
+        txtChat.setRows(5);
+        jScrollPane2.setViewportView(txtChat);
 
         javax.swing.GroupLayout panelChatLayout = new javax.swing.GroupLayout(panelChat);
         panelChat.setLayout(panelChatLayout);
@@ -99,7 +104,7 @@ public class ChatRoom extends javax.swing.JFrame {
                         .addGroup(panelChatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane1)
-                            .addComponent(jScrollPane4))))
+                            .addComponent(jScrollPane2))))
                 .addContainerGap())
         );
         panelChatLayout.setVerticalGroup(
@@ -111,9 +116,9 @@ public class ChatRoom extends javax.swing.JFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblNotificaciones)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnEnviar)
@@ -136,6 +141,10 @@ public class ChatRoom extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Este metodo recoge el texto del mensaje.
+     * @param evt 
+     */
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
         String mensaje = txtMensaje.getText();
         MetodosChat.enviarMensaje(mensaje);
@@ -159,23 +168,20 @@ public class ChatRoom extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ChatRoom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Chat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ChatRoom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Chat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ChatRoom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Chat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ChatRoom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Chat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ChatRoom().setVisible(true);
+                new Chat().setVisible(true);
             }
         });
     }
@@ -183,12 +189,12 @@ public class ChatRoom extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEnviar;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel lblNotificaciones;
+    public static javax.swing.JLabel lblNotificaciones;
     private javax.swing.JLabel lblSaludo;
     private javax.swing.JPanel panelChat;
-    public static javax.swing.JTextPane txtChat;
+    public static javax.swing.JTextArea txtChat;
     private javax.swing.JTextArea txtMensaje;
     // End of variables declaration//GEN-END:variables
 }

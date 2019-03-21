@@ -5,7 +5,7 @@ import java.io.IOException;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Aplicacion de Login
  * @author ldizbarros
  */
 public class Login extends javax.swing.JFrame {
@@ -139,6 +139,12 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Al pulsar el boton comprobamos que estan todos los campos cubiertos.
+     * Si lo estan llamamos el metodo conexionSocket de la clase MetodosChat
+     * que realizara la conexion.
+     * @param evt 
+     */
     private void btnConectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConectarActionPerformed
         String ip = txtIP.getText();
         String port = txtPuerto.getText();
