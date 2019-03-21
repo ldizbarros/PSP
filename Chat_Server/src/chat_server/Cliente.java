@@ -6,7 +6,7 @@ import java.io.OutputStream;
 import java.net.Socket;
 
 /**
- * Clase donde se define el hilo.
+ * Clase donde se define el hilo para recibir y enviar mensajes.
  * @author ldizbarros
  */
 public class Cliente extends Thread{
@@ -35,12 +35,13 @@ public class Cliente extends Thread{
                 System.out.println("Se ha recibido un mensaje: "+nickname+":"+mensajeRecibido);
                 if (mensajeRecibido.contains("/bye")){
                     ChatServer.listaClientes.remove(this);
-                    System.out.println("Hay "+ChatServer.listaClientes.size()+" usuarios conectados");
                     
                     for (Cliente elemento: ChatServer.listaClientes) {
-                        String conexion = nickname+" se ha desconectado.\n"; 
+                        String conexion = nickname+" se ha desconectado.\n;"+ChatServer.listaClientes.size()+";"; 
                         elemento.enviarMensaje(conexion);
                     }
+                    System.out.println("Hay "+ChatServer.listaClientes.size()+" usuarios conectados");
+                    
                     //Cerramos la conexión
                     socket.close();
                     System.out.println(nickname+" se ha desconectado");
@@ -58,6 +59,10 @@ public class Cliente extends Thread{
         }
     }
     
+    /**
+     * Este metodo se encarga de enviar los mesajes a todos los clientes.
+     * @param mensaje texto a enviar.
+     */
     public void enviarMensaje(String mensaje){
         try {
             output.write(mensaje.getBytes());
